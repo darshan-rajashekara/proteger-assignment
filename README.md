@@ -1,16 +1,46 @@
-# React + Vite
+# Protegor AI – Frontend Assignment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a frontend dashboard implementation built as part of the **Protegor AI frontend assignment**.
 
-Currently, two official plugins are available:
+The UI is developed based on the provided Figma design and focuses on layout accuracy, component structure, and clean styling.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- Vite
+- JavaScript
+- CSS (custom styling)
+- png (for icons)
+- SVG (for charts)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📁 Project Structure
+src/
+├── assets/ # Images & icons
+├── components/ # Reusable UI components
+├── pages/ # Page-level components
+├── styles/ # Global 
+├── App.jsx
+├── main.jsx
+
+
+---
+
+## ▶️ How to Run the Project
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/darshan-rajashekara/proteger-assignment.git
+2. Navigate to the project folder:
+   cd proteger-assignment
+3. Install dependencies: 
+   npm install
+4. Start the development server:
+   npm run dev
+5. Open in browser:
+   http://localhost:5173
+   
+   
