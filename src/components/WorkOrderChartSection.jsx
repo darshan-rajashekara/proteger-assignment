@@ -7,12 +7,16 @@ const workOrderDepartments = [
 ];
 
 const WorkOrderChartSection = () => {
+  const maxTotal = Math.max(...workOrderDepartments.map(d => d.open + d.closed));
+  const steps = 6;
+  const stepValue = Math.ceil(maxTotal / steps) || 1;
+  const ticks = Array.from({ length: steps + 1 }, (_, i) => i * stepValue);
+
   return (
     <section className="incident-section">
       <header className="incident-header">
         <div>
           <h2 className="card-title">Work Order Reported - 12</h2>
-          <p className="card-subtitle">Total No.of.Work order</p>
         </div>
         <div className="legend">
           <span className="legend-dot legend-open" /> Open
@@ -41,6 +45,16 @@ const WorkOrderChartSection = () => {
           </div>
         ))}
       </div>
+
+      <div className="incident-scale">
+        <div className="scale-labels">
+          {ticks.map((t) => (
+            <div key={t} className="scale-tick">{t}</div>
+          ))}
+        </div>
+      </div>
+
+      <p className="card-subtitle">Total No.of.Work order</p>
     </section>
   );
 };

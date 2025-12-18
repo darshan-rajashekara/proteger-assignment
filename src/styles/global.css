@@ -896,16 +896,20 @@ body {
 }
 
 .card-title { 
-  font-size: 0.95rem;
+  font-size: 20px;
   margin: 0;
   font-weight: 600;
   color: #000000;
 }
 
 .card-subtitle {
+  display: flex;
+  justify-content: center;
   margin: 0.25rem 0 0;
-  font-size: 0.8rem;
-  color: #6b7280;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  color: #000000;
 }
 
 .metric-row {
@@ -989,7 +993,6 @@ body {
 .bar {
   position: relative;
   height: 20px;
-  border-radius: 999px;
   display: flex;
   align-items: center;
   padding-inline: 0.35rem;
@@ -998,16 +1001,52 @@ body {
 }
 
 .bar-open {
-  background: #dbeafe;
+  background: #56ABF8;
 }
 
 .bar-closed {
-  background: #dcfce7;
+  background: #D2EAFF;
 }
 
 .bar-value {
   white-space: nowrap;
 }
+
+/* Scale under the incident/workorder charts */
+.incident-scale {
+  display: grid;
+  grid-template-columns: minmax(140px, 260px) 1fr;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.scale-labels {
+  grid-column: 2;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 4px;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  position: relative;
+}
+
+.scale-labels:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 6px;
+  border-top: 1px dashed rgba(37,99,235,0.12);
+  z-index: 0;
+}
+
+.scale-tick {
+  position: relative;
+  z-index: 1;
+  padding: 0 4px;
+}
+
 
 /* Department Section */
 .department-section {
