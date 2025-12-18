@@ -55,25 +55,22 @@ const ReportsPage = () => {
             <SummarySection />
             <IncidentChartSection />
             <WorkOrderChartSection />
-            <DepartmentSection 
+            <DepartmentSection
               title="Incident Reported per department"
-              department="Anesthesiology"
               type="incident"
+              departments={[
+                { name: "Anesthesiology" },
+                { name: "Radiology" },
+              ]}
             />
-            <DepartmentSection 
-              title="Incident Reported per department"
-              department="Radiology"
-              type="incident"
-            />
-            <DepartmentSection 
+
+            <DepartmentSection
               title="Work order Reported per department"
-              department="Dermatology"
               type="workorder"
-            />
-            <DepartmentSection 
-              title="Incident Reported per department"
-              department="Gynacology"
-              type="incident"
+              departments={[
+                { name: "Dermatology" },
+                { name: "Gynacology" },
+              ]}
             />
           </div>
         </main>
