@@ -158,18 +158,23 @@ const SummarySection = () => {
       </div>
       </div>
 
-      {/* Row 2: Total Asset, Check outs, Incidents, Work Order */}
+      {/* Row 2: Only Total Asset Card */}
       <div className="summary-row-2">
-        {/* Total Asset Card */}
         <div className="summary-card metric-card total-asset-card">
           <div>
             <p className="total-asset-label">Total Asset</p>
             <p className="total-asset-value">200</p>
           </div>
         </div>
+      </div>
 
+      {/* Row 3: Check outs, Incidents, Work Order */}
+      <div className="summary-row-3">
         <div className="summary-card metric-card">
-          <h3 className="card-title">Check outs</h3>
+          <div className="metric-header">
+            <h3 className="card-title">Check outs</h3>
+          </div>
+          <div className="metric-body">
           <div className="metric-row">
             <span>Checked In</span>
             <span>0</span>
@@ -178,10 +183,14 @@ const SummarySection = () => {
             <span>Checked Out</span>
             <span>25</span>
           </div>
+          </div>
         </div>
 
         <div className="summary-card metric-card">
-          <h3 className="card-title">Incidents</h3>
+          <div className="metric-header">
+            <h3 className="card-title">Incidents</h3>
+          </div>
+          <div className="metric-body">
           <div className="metric-row">
             <span>Incidents</span>
             <span>22 Reported</span>
@@ -202,10 +211,14 @@ const SummarySection = () => {
             <span>Budget spent</span>
             <span>₹ 3,00,000</span>
           </div>
+          </div>
         </div>
 
         <div className="summary-card metric-card">
-          <h3 className="card-title">Work Order</h3>
+          <div className="metric-header">
+            <h3 className="card-title">Work Order</h3>
+          </div>
+          <div className="metric-body">
           <div className="metric-row">
             <span>Work order</span>
             <span>17 requested</span>
@@ -221,6 +234,7 @@ const SummarySection = () => {
           <div className="metric-row highlight">
             <span>Budget spent</span>
             <span>₹ 3,00,000</span>
+          </div>
           </div>
         </div>
       </div>
