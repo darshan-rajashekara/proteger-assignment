@@ -21,8 +21,10 @@ const ReportsPage = () => {
             <div className="report-header">
               <div className="report-header-left">
                 <img src={vajrablackicon} alt="Vajra" className="report-logo" />
-                <h2 className="report-title">Monthly Report</h2>
               </div>
+
+              <h2 className="report-title">Monthly Report</h2>
+
               <div className="report-header-right">
                 <div className="date-picker">
                   <button className="date-nav-btn" aria-label="Previous month">

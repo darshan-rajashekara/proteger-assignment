@@ -323,14 +323,14 @@ body {
 
 /* Report Header */
 .report-header {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* logo | title (center) | controls */
   align-items: center;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
   gap: 1rem;
+  margin-bottom: 1.5rem;
   background-color: #ffffff;
   height: 81px;
+  padding: 0 1.75rem;
 }
 
 .report-header-left {
@@ -338,7 +338,22 @@ body {
   align-items: center;
   gap: 1rem;
   margin-left: 0;
-  flex: 1;
+}
+
+.report-title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+  justify-self: center; /* center in the middle column */
+  text-align: center;
+}
+
+.report-header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-self: end;
 }
 
 /* Mobile menu button */
@@ -1266,70 +1281,106 @@ body {
 
 .department-card {
   background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.75rem;
-  padding: 1rem;
+  border: 1px solid #eef2f7;
+  border-radius: 12px;
+  padding: 1rem 3rem 1rem 1.25rem; 
+  /* ↑ extra right padding ONLY for arrow space */
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  transition: box-shadow 0.2s;
+  gap: 0.65rem;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.03);
 }
 
+
 .department-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(2,6,23,0.06);
 }
 
 .card-nav-btn {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
+  top: 12px;
+  right: 12px;
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #f3f4f6;
+  background: rgba(138, 136, 136, 0.36); /* #8A88885C */
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #6b7280;
-  transition: all 0.2s;
-}
-
-.card-nav-btn:hover {
-  background: #e5e7eb;
-  color: #111827;
 }
 
 .card-nav-btn svg {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
+  stroke: #ffffff;
+}
+
+
+
+.card-nav-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(2,6,23,0.08);
+}
+
+.card-nav-btn:focus {
+  outline: 3px solid rgba(37,99,235,0.12);
+  outline-offset: 2px;
 }
 
 .card-content {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
 }
 
 .card-row {
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  grid-template-columns: 150px 1fr; /* fixed label column | flexible value column */
+  align-items: center;
+  column-gap: 12px;
+  row-gap: 6px;
+  min-width: 0;
+  padding: 4px 0; /* small vertical spacing between rows */
 }
 
+/* Reduce label column on very small screens */
+@media (max-width: 420px) {
+  .card-row {
+    grid-template-columns: 120px 1fr;
+  }
+}
+
+/* Allow stacked layout on extremely narrow screens if needed */
+@media (max-width: 320px) {
+  .card-row {
+    grid-template-columns: 1fr;
+    align-items: flex-start;
+  }
+} 
+
 .card-label {
-  font-size: 0.75rem;
-  color: #6b7280;
+  font-size: 0.82rem;
+  color: #94a3b8; /* lighter, muted label color like Figma */
   font-weight: 400;
+  margin: 0; /* inline layout, no bottom margin */
+  white-space: nowrap; /* keep label concise */
+  margin-right: 0.5rem;
 }
 
 .card-value {
-  font-size: 0.875rem;
-  color: #111827;
-  font-weight: 500;
+  font-size: 1.05rem;
+  color: #0f172a; /* darker, prominent value color */
+  font-weight: 600;
+  line-height: 1.15;
+  min-width: 0; /* allow shrinking */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Responsive tweaks */
@@ -1447,6 +1498,11 @@ body {
     height: auto;
   }
 
+  /* Small screens: stack department cards one per row */
+  .department-cards {
+    grid-template-columns: 1fr;
+  }
+
   .report-header-left {
     gap: 8px;
     align-items: center;
@@ -1487,10 +1543,10 @@ body {
     height: 34px;
   }
 
-  .report-title {
+  /* .report-title {
     font-size: 1.15rem;
     margin: 0;
-  }
+  } */
 
   .report-header-right {
     width: 100%;
@@ -1543,10 +1599,6 @@ body {
   .incident-row {
     grid-template-columns: 1fr;
     align-items: flex-start;
-  }
-
-  .department-cards {
-    grid-template-columns: 1fr;
   }
 
   .department-header {
