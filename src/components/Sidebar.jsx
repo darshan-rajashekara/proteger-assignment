@@ -45,7 +45,7 @@ const Sidebar = () => {
           <img src={contactUsIcon} alt="Contact us" className="btn-icon" />
           Contact us
         </button>
-        <button className="ghost-btn">
+        <button className="outline-btn">
           <img src={logoutIcon} alt="Log out" className="btn-icon" />
           Log Out
         </button>

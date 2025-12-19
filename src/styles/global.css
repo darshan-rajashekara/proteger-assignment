@@ -69,6 +69,7 @@ body {
   flex-direction: column;
   gap: 0.25rem;
   flex: 1;
+  overflow-y: auto;
 }
 
 .nav-item {
@@ -110,6 +111,10 @@ body {
 }
 
 .sidebar-footer {
+  position: sticky;
+  bottom: 0;
+  background: #020f25;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -617,13 +622,20 @@ body {
   gap: 0.5rem;
   font-size: 0.95rem;
   color: #374151;
+  cursor: pointer;
+  outline: none;
+}
+
+.donut-legend-item:focus {
+  box-shadow: 0 0 0 4px rgba(37,99,235,0.08);
+  border-radius: 6px;
 }
 
 .legend-color {
   width: 14px;
   height: 14px;
   border-radius: 4px;
-}
+} 
 
 .legend-working {
   background: var(--working);
@@ -640,14 +652,35 @@ body {
 .donut-badge {
   display: inline-flex;
   align-items: center;
-  margin-top: auto;
-  gap: 0.6rem;
-  background: #0f172a;    
+  gap: 0.5rem;
+  background: #0f172a;
   color: #ffffff;
-  padding: 0.6rem 1.2rem;  
-  border-radius: 999px;
-  font-size: 0.85rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
   font-weight: 600;
+
+  /* positioning */
+  position: absolute;
+  z-index: 20;
+  left: 38px; /* default; overridden by inline style when hovered */
+  top: 68px;  /* default */
+
+  /* ensure text stays on one line */
+  white-space: nowrap;
+  min-width: 0;
+
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 160ms ease, transform 160ms ease;
+  pointer-events: none;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.2);
+}
+
+.donut-badge.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .badge-dot {
@@ -655,6 +688,7 @@ body {
   height: 8px;
   background: var(--not-working);
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .donut-card,
@@ -757,6 +791,12 @@ body {
   gap: 0.5rem;
   height: 145px;
   padding-top: 12px;
+  position: relative; /* so tooltip positions are relative to the chart content */
+}
+
+/* make tooltip follow left/top when positioned inline */
+.bar-chart-tooltip {
+  transform: none !important;
 }
 
 .bar-y-axis {

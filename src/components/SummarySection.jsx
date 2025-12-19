@@ -1,7 +1,26 @@
+import { useState } from 'react';
 import health_metrics from '../assets/png-icons/health_metrics.png';
 import distance from '../assets/png-icons/distance.png';
 
 const SummarySection = () => {
+  const [hoveredDonut, setHoveredDonut] = useState(null);
+  const [hoveredBar, setHoveredBar] = useState(null);
+  const notWorkingCount = 7;
+
+  const onBarEnter = (e, title, open, closed) => {
+    const container = e.currentTarget.closest('.bar-chart-content');
+    if (!container) return setHoveredBar({ title, open, closed });
+    const rect = e.currentTarget.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    const left = rect.left - containerRect.left + rect.width / 2; // center of bar-group
+    // place tooltip slightly above the bar; clamp to at least 8px from top
+    const rawTop = rect.top - containerRect.top;
+    const top = Math.max(8, rawTop - 8);
+    setHoveredBar({ title, open, closed, left, top });
+  };
+
+  const onBarLeave = () => setHoveredBar(null);
+
   return (
     <section className="summary-grid">
       {/* Row 1: Org Card, Donut Chart, Bar Chart */}
@@ -63,30 +82,41 @@ const SummarySection = () => {
                 strokeDasharray="75 302"
                 strokeDashoffset="-227"
                 transform="rotate(-240 60 60)"
+                tabIndex={0}
+                onMouseEnter={() => setHoveredDonut('not-working')}
+                onMouseLeave={() => setHoveredDonut(null)}
+                onFocus={() => setHoveredDonut('not-working')}
+                onBlur={() => setHoveredDonut(null)}
               />
             </svg>
+            <div className={`donut-badge ${hoveredDonut === 'not-working' ? 'visible' : ''}`} aria-hidden={hoveredDonut !== 'not-working'} style={hoveredDonut === 'not-working' ? { left: '38px', top: '68px' } : { left: '38px', top: '68px' }}>
+              <span className="badge-dot"></span>
+              <span>Not Working Assets - {notWorkingCount}</span>
+            </div>
           </div>
           <div className="donut-legend">
             <div className="donut-legend-item">
               <span className="legend-color legend-working"></span>
               <span>Working Assets</span>
             </div>
-            <div className="donut-legend-item">
+            <div
+              className="donut-legend-item"
+              tabIndex={0}
+              onMouseEnter={() => setHoveredDonut('not-working')}
+              onMouseLeave={() => setHoveredDonut(null)}
+              onFocus={() => setHoveredDonut('not-working')}
+              onBlur={() => setHoveredDonut(null)}
+            >
               <span className="legend-color legend-not-working"></span>
               <span>Not working Assets</span>
-            </div>
+            </div> 
             <div className="donut-legend-item">
               <span className="legend-color legend-discarded"></span>
               <span>Discarded</span>
             </div>
           </div>
         </div>
-        <div className="donut-badge">
-          <span className="badge-dot"></span>
-          <span>Not Working Assets - 7</span>
-        </div>
       </div>
-
       {/* Bar Chart Card */}
       <div className="summary-card bar-chart-card">
         <div className="bar-chart-header">
@@ -101,17 +131,24 @@ const SummarySection = () => {
             </div>
           </div>
         </div>
-        <div className="bar-chart-tooltip">
-          <div className="tooltip-title">Work Order</div>
-          <div className="tooltip-row">
-            <span className="tooltip-dot tooltip-open"></span>
-            <span>Open - 35</span>
-          </div>
-          <div className="tooltip-row">
-            <span className="tooltip-dot tooltip-closed"></span>
-            <span>Closed - 20</span>
-          </div>
-        </div>
+          {hoveredBar && (
+            <div
+              className="bar-chart-tooltip"
+              style={{ left: `${hoveredBar.left}px`, top: `${hoveredBar.top}px`, transform: 'translate(-50%, -8px)' }}
+              role="dialog"
+              aria-hidden={!hoveredBar}
+            >
+              <div className="tooltip-title">{hoveredBar.title}</div>
+              <div className="tooltip-row">
+                <span className="tooltip-dot tooltip-open"></span>
+                <span>Open - {hoveredBar.open}</span>
+              </div>
+              <div className="tooltip-row">
+                <span className="tooltip-dot tooltip-closed"></span>
+                <span>Closed - {hoveredBar.closed}</span>
+              </div>
+            </div>
+          )}
         <div className="bar-chart-content">
           <div className="bar-y-axis">
             <span>250</span>
@@ -122,7 +159,14 @@ const SummarySection = () => {
             <span>0</span>
           </div>
           <div className="bar-chart-bars">
-            <div className="bar-group-item">
+            <div
+              className="bar-group-item"
+              tabIndex={0}
+              onMouseEnter={(e) => onBarEnter(e, 'Work order', 35, 20)}
+              onMouseLeave={onBarLeave}
+              onFocus={(e) => onBarEnter(e, 'Work order', 35, 20)}
+              onBlur={onBarLeave}
+            >
               <div className="bar-stack">
                 <div className="bar-segment bar-segment-open" style={{ height: '70px' }}>
                   <span className="bar-segment-value">35</span>
@@ -133,7 +177,14 @@ const SummarySection = () => {
               </div>
               <span className="bar-group-label">Incidents</span>
             </div>
-            <div className="bar-group-item">
+            <div
+              className="bar-group-item"
+              tabIndex={0}
+              onMouseEnter={(e) => onBarEnter(e, 'Work Order', 5, 0)}
+              onMouseLeave={onBarLeave}
+              onFocus={(e) => onBarEnter(e, 'Work Order', 5, 0)}
+              onBlur={onBarLeave}
+            >
               <div className="bar-stack">
                 <div className="bar-segment bar-segment-open" style={{ height: '10px' }}>
                   <span className="bar-segment-value">5</span>
@@ -142,7 +193,14 @@ const SummarySection = () => {
               </div>
               <span className="bar-group-label">Work Order</span>
             </div>
-            <div className="bar-group-item">
+            <div
+              className="bar-group-item"
+              tabIndex={0}
+              onMouseEnter={(e) => onBarEnter(e, 'Check outs', 10, 7)}
+              onMouseLeave={onBarLeave}
+              onFocus={(e) => onBarEnter(e, 'Check outs', 10, 7)}
+              onBlur={onBarLeave}
+            >
               <div className="bar-stack">
                 <div className="bar-segment bar-segment-open" style={{ height: '20px' }}>
                   <span className="bar-segment-value">10</span>
