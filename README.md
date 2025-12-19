@@ -19,12 +19,12 @@ The UI is developed based on the provided Figma design and focuses on layout acc
 
 ## 📁 Project Structure
 src/
-├── assets/ # Images & icons
-├── components/ # Reusable UI components
-├── pages/ # Page-level components
-├── styles/ # Global 
-├── App.jsx
-├── main.jsx
+├── assets/ # Images & icons  
+├── components/ # Reusable UI components  
+├── pages/ # Page-level components   
+├── styles/ # Global    
+├── App.jsx    
+├── main.jsx     
 
 
 ---
