@@ -336,8 +336,74 @@ body {
 .report-header-left {
   display: flex;
   align-items: center;
-  gap: 22rem;
-  margin-left: 20px;
+  gap: 1rem;
+  margin-left: 0;
+  flex: 1;
+}
+
+/* Mobile menu button */
+.menu-btn {
+  display: none;
+  border: none;
+  background: transparent;
+  color: #111827;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 6px;
+}
+
+/* Mobile sidebar overlay */
+.mobile-sidebar-overlay {
+  display: none;
+}
+
+.mobile-sidebar-overlay.visible {
+  display: block;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 60;
+}
+
+/* Mobile variant of sidebar (slides in) */
+.sidebar.mobile {
+  display: flex; /* override the display:none on small breakpoints */
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 82%;
+  max-width: 420px;
+  background: #071327;
+  transform: translateX(-100%);
+  transition: transform 260ms ease;
+  z-index: 70;
+}
+
+.mobile-sidebar-overlay.visible .sidebar.mobile {
+  transform: translateX(0);
+}
+
+.mobile-close-btn {
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .menu-btn { display: inline-flex; }
+}
+
+@media (max-width: 640px) {
+  .menu-btn { display: inline-flex; }
 }
 
 .report-logo {
@@ -1044,6 +1110,10 @@ body {
   background: #56ABF8;
 }
 
+.work-bar-open {
+  background: #1E3A8A;
+}
+
 .bar-closed {
   background: #D2EAFF;
 }
@@ -1319,9 +1389,151 @@ body {
 
 @media (max-width: 640px) {
   .topbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    background: #071327; /* dark header background */
+    color: #ffffff;
+    gap: 0.5rem;
+  }
+
+  /* Title in white, compact */
+  .topbar-title .title-main {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .topbar-subtitle { display: none; }
+
+  /* Hide dense right-side controls on small screens except menu */
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .topbar-right > .chip,
+  .topbar-right > .icon-btn,
+  .topbar-right > .avatar-btn {
+    display: none;
+  }
+
+  .menu-btn {
+    display: inline-flex;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+  }
+
+  /* Report header becomes a separate white control row under the dark topbar */
+  .report-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 8px 20px rgba(2,6,23,0.06);
+    height: auto;
+  }
+
+  .report-header-left {
+    gap: 8px;
+    align-items: center;
+    width: auto;
+    margin: 0;
+  }
+
+  .report-logo { height: 28px; }
+
+  .report-title { font-size: 15px; color: #0f172a; font-weight: 700; margin: 0; }
+
+  .report-header-right { width: auto; display: flex; gap: 8px; }
+
+  .date-picker { background: transparent; border: 1px solid #e5e7eb; padding: 6px 8px; }
+
+  .download-btn { padding: 6px 10px; font-size: 0.85rem; }
+
+  .date-text { font-size: 0.85rem; color: #0f172a; }
+
+}
+  /* Make report header stack and shrink properly */
+  .report-header {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 0.75rem 0.75rem;
+    background-color: #ffffff;
+    height: auto;
+  }
+
+  .report-header-left {
+    gap: 0.5rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  .report-logo {
+    height: 34px;
+  }
+
+  .report-title {
+    font-size: 1.15rem;
+    margin: 0;
+  }
+
+  .report-header-right {
+    width: 100%;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .date-picker {
+    min-width: 0;
+    padding: 6px 8px;
+    gap: 6px;
+  }
+
+  .date-text {
+    min-width: 0;
+    font-size: 0.85rem;
+  }
+
+  .download-btn {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .download-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .report-header-right .download-btn {
+    flex-shrink: 0;
+  }
+
+  .report-header-right > .date-picker {
+    order: 1;
+    margin-left: auto;
+  }
+
+  .report-header-right > .download-btn {
+    order: 2;
   }
 
   .summary-row-2 {
@@ -1343,5 +1555,27 @@ body {
 
   .department-cards {
     padding: 1rem 1.25rem;
+  }
+
+
+/* Extra small screens: stack download button to full width */
+@media (max-width: 420px) {
+  .report-header-right {
+    justify-content: space-between;
+  }
+
+  .report-header-right > .date-picker {
+    order: 1;
+    margin-left: 0;
+  }
+
+  .report-header-right > .download-btn {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .report-title {
+    font-size: 1rem;
   }
 }

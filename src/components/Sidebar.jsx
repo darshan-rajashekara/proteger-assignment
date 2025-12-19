@@ -20,37 +20,76 @@ const navItems = [
   { name: 'Reports', icon: reportsIcon, hasDropdown: true },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ open = false, onClose }) => {
+  // Desktop sidebar remains the same. For mobile, we render an overlay when `open` is true.
   return (
-    <aside className="sidebar">
-      <div className="sidebar-header">
-        <img src={vajraLogo} alt="Vajra" className="sidebar-logo" />
-      </div>
-      <nav className="sidebar-nav">
-        {navItems.map((item) => (
-          <button
-            key={item.name}
-            className={`nav-item ${item.name === 'Reports' ? 'nav-item-active' : ''}`}
-          >
-            <img src={item.icon} alt={item.name} className="nav-icon" />
-            <span>{item.name}</span>
-            {item.hasDropdown && (
-              <img src={dropdownIcon} alt="dropdown" className="nav-dropdown" />
-            )}
+    <>
+      {/* Desktop sidebar - hidden by CSS at smaller breakpoints */}
+      <aside className="sidebar" aria-hidden={open ? true : false}>
+        <div className="sidebar-header">
+          <img src={vajraLogo} alt="Vajra" className="sidebar-logo" />
+        </div>
+        <nav className="sidebar-nav">
+          {navItems.map((item) => (
+            <button
+              key={item.name}
+              className={`nav-item ${item.name === 'Reports' ? 'nav-item-active' : ''}`}
+            >
+              <img src={item.icon} alt={item.name} className="nav-icon" />
+              <span>{item.name}</span>
+              {item.hasDropdown && (
+                <img src={dropdownIcon} alt="dropdown" className="nav-dropdown" />
+              )}
+            </button>
+          ))}
+        </nav>
+        <div className="sidebar-footer">
+          <button className="outline-btn">
+            <img src={contactUsIcon} alt="Contact us" className="btn-icon" />
+            Contact us
           </button>
-        ))}
-      </nav>
-      <div className="sidebar-footer">
-        <button className="outline-btn">
-          <img src={contactUsIcon} alt="Contact us" className="btn-icon" />
-          Contact us
-        </button>
-        <button className="outline-btn">
-          <img src={logoutIcon} alt="Log out" className="btn-icon" />
-          Log Out
-        </button>
+          <button className="outline-btn">
+            <img src={logoutIcon} alt="Log out" className="btn-icon" />
+            Log Out
+          </button>
+        </div>
+      </aside>
+
+      {/* Mobile overlay sidebar */}
+      <div className={`mobile-sidebar-overlay ${open ? 'visible' : ''}`} onClick={onClose} aria-hidden={!open}>
+        <aside className="sidebar mobile" onClick={(e) => e.stopPropagation()}>
+          <div className="sidebar-header" style={{ justifyContent: 'space-between' }}>
+            <img src={vajraLogo} alt="Vajra" className="sidebar-logo" />
+            <button className="mobile-close-btn" onClick={onClose} aria-label="Close menu">×</button>
+          </div>
+          <nav className="sidebar-nav">
+            {navItems.map((item) => (
+              <button
+                key={item.name}
+                className={`nav-item ${item.name === 'Reports' ? 'nav-item-active' : ''}`}
+                onClick={onClose}
+              >
+                <img src={item.icon} alt={item.name} className="nav-icon" />
+                <span>{item.name}</span>
+                {item.hasDropdown && (
+                  <img src={dropdownIcon} alt="dropdown" className="nav-dropdown" />
+                )}
+              </button>
+            ))}
+          </nav>
+          <div className="sidebar-footer">
+            <button className="outline-btn">
+              <img src={contactUsIcon} alt="Contact us" className="btn-icon" />
+              Contact us
+            </button>
+            <button className="outline-btn">
+              <img src={logoutIcon} alt="Log out" className="btn-icon" />
+              Log Out
+            </button>
+          </div>
+        </aside>
       </div>
-    </aside>
+    </>
   );
 };
 

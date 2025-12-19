@@ -1,21 +1,27 @@
 import headerIcon1 from '../assets/png-icons/headericon1.png';
 import notificationicon from '../assets/png-icons/notificationicon.png';
 import downarrowblack from '../assets/png-icons/downarrowblack.png';
-import leftArrow from '../assets/png-icons/leftArrow.png';
 
-const TopBar = () => {
+const TopBar = ({ onToggleSidebar, title = 'Reports' }) => {
   return (
     <header className="topbar">
       <div className="topbar-left">
-        <button className="back-btn" aria-label="Go back">
-          <img src={leftArrow} alt="left arrow" className="leftArrow-icon" />
-        </button>
         <h1 className="topbar-title">
-          <span className="title-main">Reports</span>
+          <span className="title-main">{title}</span>
           <span className="topbar-subtitle">/ Bio Medical</span>
         </h1>
       </div>
+
       <div className="topbar-right">
+        {/* Menu button placed on the right so it matches the screenshot on mobile */}
+        <button className="menu-btn" aria-label="Open menu" onClick={onToggleSidebar}>
+          <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect y="0" width="20" height="2" rx="1" fill="currentColor" />
+            <rect y="6" width="20" height="2" rx="1" fill="currentColor" />
+            <rect y="12" width="20" height="2" rx="1" fill="currentColor" />
+          </svg>
+        </button>
+
         <div className="chip">
           <span className="chip-badge">NB</span>
           <span className="chip-text">Non Bio Medical</span>

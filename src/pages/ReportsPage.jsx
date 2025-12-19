@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Sidebar from '../components/Sidebar.jsx';
 import TopBar from '../components/TopBar.jsx';
 import SummarySection from '../components/SummarySection.jsx';
@@ -8,11 +9,13 @@ import vajraLogo from '../assets/png-icons/vajralogo.png';
 import vajrablackicon from '../assets/png-icons/vajrablackicon.png';
 
 const ReportsPage = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
     <div className="app-root">
-      <Sidebar />
+      <Sidebar open={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
       <div className="app-main">
-        <TopBar />
+        <TopBar title="Monthly Report" onToggleSidebar={() => setIsSidebarOpen(true)} />
         <main className="app-content">
           <div>
             <div className="report-header">

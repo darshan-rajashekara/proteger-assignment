@@ -30,7 +30,7 @@ const WorkOrderChartSection = () => {
             <div className="incident-label">{dept.name}</div>
             <div className="incident-bars">
               <div
-                className="bar bar-open"
+                className="bar work-bar-open"
                 style={{ width: `${dept.open * 3}px` }}
               >
                 <span className="bar-value">{dept.open}</span>
